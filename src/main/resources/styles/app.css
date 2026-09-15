@@ -24,6 +24,13 @@
 .button:focused, .combo-box:focused, .spinner:focused { -fx-effect: dropshadow(gaussian, rgba(34,150,243,0.25), 8, 0.15, 0, 0); }
 .settings-dialog { -fx-background-color: #f8fbfe; -fx-font-family: "Microsoft YaHei UI"; }
 .settings-dialog .header-panel { -fx-background-color: #e8f5ff; }
+.settings-section-title { -fx-font-size: 16px; -fx-font-weight: 800; -fx-text-fill: #18324a; }
+.opensource-url { -fx-text-fill: #1689df; -fx-font-size: 13px; }
+.donate-button { -fx-background-color: linear-gradient(to right, #ff9f43, #ff6b6b); -fx-text-fill: white; }
+.donate-button:hover { -fx-background-color: linear-gradient(to right, #f38d31, #ee5656); }
+.donation-dialog { -fx-background-color: #f8fbfe; -fx-font-family: "Microsoft YaHei UI"; }
+.donation-dialog .header-panel { -fx-background-color: #e8f5ff; }
+.donation-dialog .tab-pane .tab-header-area .tab-header-background { -fx-background-color: transparent; }
 .large-preview-card { -fx-background-color: white; -fx-background-radius: 18; -fx-border-radius: 18; -fx-border-color: #b9ddf5; -fx-padding: 16; -fx-effect: dropshadow(gaussian, rgba(20,55,80,0.28), 26, 0.18, 0, 7); }
 .tooltip { -fx-background-color: transparent; -fx-padding: 0; -fx-effect: null; }
 .preview-file-name { -fx-text-fill: #314d63; -fx-font-size: 13px; -fx-font-weight: bold; -fx-alignment: center; }

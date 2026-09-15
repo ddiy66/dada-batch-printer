@@ -23,6 +23,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
@@ -47,6 +49,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public final class BatchPrinterApp extends Application {
+    private static final String OPEN_SOURCE_URL = "https://github.com/ddiy66/dada-batch-printer";
     private final ObservableList<PrintTask> tasks = FXCollections.observableArrayList();
     private final PrinterService printerService = new PrinterService();
     private final FileCollector fileCollector = new FileCollector();
@@ -564,16 +567,44 @@ public final class BatchPrinterApp extends Application {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(mainStage);
         dialog.setTitle("设置");
-        dialog.setHeaderText("启动与窗口设置");
+        dialog.setHeaderText("设置与支持");
         CheckBox autoStart = new CheckBox("开机自动启动");
         autoStart.setSelected(appSettings.autoStart());
         CheckBox minimizeToTray = new CheckBox("最小化时缩小到系统托盘（关闭始终进入托盘）");
         minimizeToTray.setSelected(appSettings.minimizeToTray());
         Label note = new Label("托盘图标双击可重新打开，右键可退出程序。");
         note.getStyleClass().add("subtitle");
-        VBox content = new VBox(14, autoStart, minimizeToTray, note);
+
+        Label supportTitle = new Label("开源与支持");
+        supportTitle.getStyleClass().add("settings-section-title");
+        Hyperlink sourceLink = new Hyperlink(OPEN_SOURCE_URL);
+        sourceLink.getStyleClass().add("opensource-url");
+        sourceLink.setOnAction(event -> getHostServices().showDocument(OPEN_SOURCE_URL));
+
+        Button openSource = new Button("打开开源项目");
+        openSource.getStyleClass().add("secondary-button");
+        openSource.setOnAction(event -> getHostServices().showDocument(OPEN_SOURCE_URL));
+        Button copySource = new Button("复制开源地址");
+        copySource.getStyleClass().add("ghost-button");
+        copySource.setOnAction(event -> {
+            ClipboardContent clipboardContent = new ClipboardContent();
+            clipboardContent.putString(OPEN_SOURCE_URL);
+            Clipboard.getSystemClipboard().setContent(clipboardContent);
+            copySource.setText("已复制");
+        });
+        Button donate = new Button("鼓励作者 / 打赏");
+        donate.getStyleClass().add("donate-button");
+        donate.setOnAction(event -> showDonationDialog());
+        HBox supportButtons = new HBox(10, openSource, copySource, donate);
+        Label supportNote = new Label("项目完全开源免费，欢迎分享、Star 和提出建议。您的支持会帮助软件持续更新。");
+        supportNote.setWrapText(true);
+        supportNote.getStyleClass().add("subtitle");
+
+        VBox content = new VBox(14, autoStart, minimizeToTray, note, new Separator(),
+                supportTitle, sourceLink, supportButtons, supportNote);
         content.setPadding(new Insets(12, 4, 4, 4));
         dialog.getDialogPane().setContent(content);
+        dialog.getDialogPane().setPrefWidth(560);
         dialog.getDialogPane().getStylesheets().add(resource("/styles/app.css"));
         dialog.getDialogPane().getStyleClass().add("settings-dialog");
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
@@ -586,6 +617,37 @@ public final class BatchPrinterApp extends Application {
                 alert("保存设置失败：" + ex.getMessage());
             }
         });
+    }
+
+    private void showDonationDialog() {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(mainStage);
+        dialog.setTitle("鼓励作者");
+        dialog.setHeaderText("感谢您支持“打打印机”持续更新");
+
+        TabPane tabs = new TabPane();
+        tabs.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+        tabs.getTabs().addAll(
+                donationTab("微信支付", "/images/donate-wechat.jpg"),
+                donationTab("支付宝", "/images/donate-alipay.jpg")
+        );
+        tabs.setPrefSize(430, 590);
+        dialog.getDialogPane().setContent(tabs);
+        dialog.getDialogPane().getStylesheets().add(resource("/styles/app.css"));
+        dialog.getDialogPane().getStyleClass().add("donation-dialog");
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+        dialog.showAndWait();
+    }
+
+    private Tab donationTab(String title, String imagePath) {
+        ImageView imageView = new ImageView(new Image(resource(imagePath), true));
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
+        imageView.setFitWidth(390);
+        imageView.setFitHeight(520);
+        StackPane imagePane = new StackPane(imageView);
+        imagePane.setPadding(new Insets(12));
+        return new Tab(title, imagePane);
     }
     private void alert(String message) { new Alert(Alert.AlertType.INFORMATION, message, ButtonType.OK).showAndWait(); }
     private void updateSummary() {
