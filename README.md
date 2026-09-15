@@ -7,6 +7,7 @@
 [⬇ 下载最新版：打打印机 v2.5 Windows x64 ZIP](https://github.com/ddiy66/dada-batch-printer/raw/main/download/%E6%89%93%E6%89%93%E5%8D%B0%E6%9C%BA-v2.5-Windows-x64.zip)
 
 下载后解压，双击文件夹中的 `打打印机.exe` 即可运行，无需另外安装 Java。
+
 <img width="1202" height="716" alt="image" src="https://github.com/user-attachments/assets/8d2db9f9-a4c1-47b3-980b-23c4e43b65fd" />
 
 ## 功能
@@ -50,8 +51,8 @@ mvn javafx:run
 生产发布建议用 JDK 17 的 `jpackage` 生成自带运行时的 Windows 安装包，避免用户单独配置 Java。首次运行时系统/打印机驱动可能弹出权限或打印确认窗口。
 
 ## 打赏作者 一瓶红牛不嫌少，一包华子不嫌多
-<img width="1080" height="1620" alt="9df040c74e13a3ff086e6b1278c90ad" src="https://github.com/user-attachments/assets/203ec579-18e2-4c85-aad0-84d956e8983a" />
+<img width="270" height="405" alt="9df040c74e13a3ff086e6b1278c90ad" src="https://github.com/user-attachments/assets/203ec579-18e2-4c85-aad0-84d956e8983a" />
 
-<img width="1242" height="1692" alt="08ddcd2fbbe57017ee45c38b4afba84" src="https://github.com/user-attachments/assets/efc6ffbd-089d-450d-b07e-377f00416237" />
+<img width="310.5" height="423" alt="08ddcd2fbbe57017ee45c38b4afba84" src="https://github.com/user-attachments/assets/efc6ffbd-089d-450d-b07e-377f00416237" />
 
 
