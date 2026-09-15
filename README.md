@@ -4,7 +4,7 @@
 
 ## 立即下载
 
-[下载最新版：打打印机 v2.5 Windows x64 ZIP](https://github.com/ddiy66/dada-batch-printer/releases/download/v2.5/%E6%89%93%E6%89%93%E5%8D%B0%E6%9C%BA-v2.5-Windows-x64.zip)
+[⬇ 下载最新版：打打印机 v2.5 Windows x64 ZIP](https://github.com/ddiy66/dada-batch-printer/raw/main/download/%E6%89%93%E6%89%93%E5%8D%B0%E6%9C%BA-v2.5-Windows-x64.zip)
 
 下载后解压，双击文件夹中的 `打打印机.exe` 即可运行，无需另外安装 Java。
 
